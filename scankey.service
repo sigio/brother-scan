@@ -1,0 +1,10 @@
+[Unit]
+Description=Brother Scan-Key Daemon
+
+[Service]
+WorkingDirectory=/opt/brother/scanner/brother-scan/
+ExecStart=/opt/brother/scanner/brother-scan/main.py
+User=mark
+
+[Install]
+WantedBy=multi-user.target
