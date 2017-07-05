@@ -1,4 +1,4 @@
-#! /bin/bash
+#!/bin/bash 
 set +o noclobber
 #
 #   $1 = scanner device
@@ -11,14 +11,14 @@ set +o noclobber
 resolution=200
 function=$1
 user=$2
-BASE=~/ownCloud/Scanner
+BASE=/data/Scans
 mkdir -p $BASE
-output_tmp=$BASE/$(date | sed s/' '/'_'/g | sed s/'\:'/'_'/g)
+output_tmp=$BASE/$(date +%Y%m%d-%H:%M:%S)
 
-sleep  0.01
+sleep 1
 
 echo "Scan from $2($1)"
-scanadf --resolution $resolution -x 212 -y 301 -o"$output_tmp"_%04d
+scanadf -v -d "brother4:net1;dev0" --source "Automatic Document Feeder(left aligned,Duplex)" --resolution $resolution -x 212 -y 301 -o"$output_tmp"_%04d
 for pnmfile in $(ls "$output_tmp"*)
 do
    echo pnmtojpeg  "$pnmfile"  "$pnmfile".jpg
